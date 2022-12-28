@@ -33,7 +33,7 @@ Contact us if you have any problem
 
 ![Members](./Image_and_Video/members.png)
 
-Contributors names and contact info
+Contributor names and contact info
 
 - [Nguyễn Quang Ren](https://www.facebook.com/oithatlavuibietbaonhieu.uat) - Da Nang University of Technology
 - [Bùi Duy Quốc](https://www.facebook.com/duy.quoc.77964) - Da Nang University of Technology
