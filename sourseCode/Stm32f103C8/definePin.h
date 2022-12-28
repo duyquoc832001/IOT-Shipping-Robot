@@ -31,10 +31,6 @@
 //////////////////Cảm biến//////////////////////////////////
 //CB Hành trình
 #define CBHT PB15
-//CB Siêu âm
-// #define CBSA_ECHO PB14
-// #define CBSA_TRIG PB13
-#define CBSA_ECHO PB14
 
 /////////////////////Button điều khiển/////////////////////
 #define RE_LO PB12
@@ -45,5 +41,5 @@
 #define AUTO_MAN PB5
 #define DES_1 PA15
 #define DES_2 PA12
-#define OBSTACLE PB13
+#define OBSTACLE1 PB14
 

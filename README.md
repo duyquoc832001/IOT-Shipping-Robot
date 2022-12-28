@@ -2,7 +2,8 @@
 
 # Project Title
 
-Vectoring code for a IOT Shipping Robot written for Stm32 Microcontroller.  
+Vectoring code for a IOT Shipping Robot written for Stm32 Microcontroller.
+
 ![](./Image_and_Video/9e300a29bbd1628f3bc0.jpg)
 
 ## DC Motor Speed Control
@@ -18,7 +19,7 @@ X and Y vector (or Magnitude, Theta) are transformed to the three motor RPMs.
 
 ## High Level Control
 
-### 1. Control via ESP8266 blynk app:
+### 1. Control via ESP32 CAM NODE-RED app:
 
 This functionality is added for the control of IOT Shipping Robot running your smart phone.
 
@@ -29,6 +30,8 @@ This functionality is added for the control of IOT Shipping Robot running your s
 Contact us if you have any problem
 
 ## Authors
+
+![Members](./Image_and_Video/members.png)
 
 Contributors names and contact info
 

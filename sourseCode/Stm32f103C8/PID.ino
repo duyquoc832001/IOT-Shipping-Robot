@@ -12,28 +12,6 @@ void PID() {
     time_counter = timeCurrent;
   }
 
-  // if (temp1 <= w1) { temp1 = temp1 + 1; }
-  // if (temp2 <= w2) { temp2 = temp2 + 1; }
-  // if (temp3 <= w3) { temp3 = temp3 + 1; }
-  // if (temp4 <= w4) { temp4 = temp4 + 1; }
-
-  // if (temp1 < 0) {
-  //   encoderPos1 = 0;
-  //   temp1 = 0;
-  // }
-  // if (temp2 < 0) {
-  //   encoderPos2 = 0;
-  //   temp2 = 0;
-  // }
-  // if (temp3 < 0) {
-  //   encoderPos3 = 0;
-  //   temp3 = 0;
-  // }
-  // if (temp4 < 0) {
-  //   encoderPos4 = 0;
-  //   temp4 = 0;
-  // }
-
   setpoint1 = w1;
   setpoint2 = w2;
   setpoint3 = w3;

@@ -31,9 +31,9 @@ void switch1() {
     selection_des = 1;
   }
 
-  // if (digitalRead(OBSTACLE) == 1) {
-  //   obstacle = 1;
-  // } else {
-  //   obstacle = 0;
-  // }
+  if (digitalRead(OBSTACLE1) == 0) {
+    obstacle = 1;
+  } else {
+    obstacle = 0;
+  }
 }

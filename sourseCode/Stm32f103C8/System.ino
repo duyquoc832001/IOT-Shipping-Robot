@@ -103,11 +103,11 @@ void Sys_auto() {
   }
 
   // Bước 4: Xe đi thẳng 90cm tuyến đường 2
-  if (step == 4 && (positionCurrent - newPosition < 90)) {
+  if (step == 4 && (positionCurrent - newPosition < 80)) {
     Wz = -(z - 90) * 1.6;
     Vx = speed_setpoint;
   }
-  if (step == 4 && (positionCurrent - newPosition >= 90)) {
+  if (step == 4 && (positionCurrent - newPosition >= 80)) {
     Vx = 0;
     Vy = 0;
     Wz = 0;
@@ -130,7 +130,7 @@ void Sys_auto() {
 
   // Bước 6: Xe dừng trong vòng 2 giây và đi thẳng
   if (step == 6 && (timeCurrent - time >= restTime)) {
-    Wz = -(z - 180) * 1.6;
+    Wz = -(z - 175) * 1.6;
     Vx = speed_setpoint;
     newPosition = positionCurrent;
     time = timeCurrent;
@@ -142,7 +142,7 @@ void Sys_auto() {
 
   // Bước 7: Xe đi tới destination
   if (step == 7 && (positionCurrent - newPosition < position_des)) {
-    Wz = -(z - 180) * 1.6;
+    Wz = -(z - 175) * 1.6;
     Vx = speed_setpoint;
   }
   if (step == 7 && (positionCurrent - newPosition >= position_des)) {
@@ -192,7 +192,7 @@ void Sys_auto() {
   // *Lưu ý: Chương trình cập nhập dữ liệu trên app !!!!
 
   if (step == 8 && (timeCurrent - time >= restTime)) {
-    if (z >= 360) {
+    if (z >= 350) {
       Wz = 0;
       newPosition = positionCurrent;
       time = timeCurrent;
@@ -208,7 +208,7 @@ void Sys_auto() {
     Wz = 0;
   }
   if (step == 9 && (timeCurrent - time >= restTime)) {
-    Wz = -(z - 360) * 1.6;
+    Wz = -(z - 350) * 1.6;
     Vx = speed_setpoint;
     des_a = 0;
     des_b = 0;
@@ -222,7 +222,7 @@ void Sys_auto() {
 
   // Bước 10: Xe hoàn thành tuyến đường 3
   if (step == 10 && (positionCurrent - newPosition < position_completion)) {
-    Wz = -(z - 360) * 1.6;
+    Wz = -(z - 350) * 1.6;
     Vx = speed_setpoint;
   }
   if (step == 10 && (positionCurrent - newPosition >= position_completion)) {
@@ -242,7 +242,7 @@ void Sys_auto() {
     Wz = 0;
   }
   if (step == 11 && (timeCurrent - time >= restTime)) {
-    if (z <= 270) {
+    if (z <= 265) {
       Wz = 0;
       newPosition = positionCurrent;
       time = timeCurrent;
@@ -259,19 +259,19 @@ void Sys_auto() {
     Wz = 0;
   }
   if (step == 12 && (timeCurrent - time >= restTime)) {
-    Wz = -(z - 270) * 1.6;
-    Vx = speed_setpoint;
+    Wz = -(z - 265) * 1.6;
+    Vx = 15;
     newPosition = positionCurrent;
     time = timeCurrent;
     step = 13;
   }
 
   // Bước 13: Xe đi thẳng 15cm tuyến đường 4
-  if (step == 13 && (positionCurrent - newPosition < 80)) {
-    Wz = -(z - 270) * 1.6;
-    Vx = speed_setpoint;
+  if (step == 13 && (positionCurrent - newPosition < 65)) {
+    Wz = -(z - 265) * 1.6;
+    Vx = 15;
   }
-  if (step == 13 && (positionCurrent - newPosition >= 80)) {
+  if (step == 13 && (positionCurrent - newPosition >= 65)) {
     Vx = 0;
     Vy = 0;
     Wz = 0;
@@ -283,7 +283,7 @@ void Sys_auto() {
   // Bước 14: Xe dừng trong vòng 2 giây và xoay phải 90 deg
 
   if (step == 14 && (timeCurrent - time >= restTime)) {
-    if (z <= 180) {
+    if (z <= 179) {
       Wz = 0;
       newPosition = positionCurrent;
       time = timeCurrent;
@@ -300,8 +300,8 @@ void Sys_auto() {
     Wz = 0;
   }
   if (step == 15 && (timeCurrent - time >= restTime)) {
-    Wz = -(z - 180) * 1.6;
-    Vx = speed_setpoint;
+    Wz = -(z - 179) * 1.6;
+    Vx = 17;
     newPosition = positionCurrent;
     time = timeCurrent;
     step = 16;
@@ -309,8 +309,8 @@ void Sys_auto() {
 
   // Bước 16: Xe đi thẳng 15cm tới station 2
   if (step == 16 && (positionCurrent - newPosition < 245)) {
-    Wz = -(z - 180) * 1.6;
-    Vx = speed_setpoint;
+    Wz = -(z - 179) * 1.6;
+    Vx = 17;
   }
   if (step == 16 && (positionCurrent - newPosition >= 245)) {
     Vx = 0;
@@ -351,8 +351,8 @@ void Sys_auto() {
     Wz = 0;
   }
   if (step == 18 && (timeCurrent - time >= restTime)) {
-    Wz = -(z - 180) * 1.6;
-    Vx = speed_setpoint;
+    Wz = -(z - 179) * 1.6;
+    Vx = 15;
     des_a = 0;
     des_b = 0;
     des_c = 0;
@@ -364,11 +364,11 @@ void Sys_auto() {
   }
 
   // Bước 19: Xe đi thẳng 40cm tới lại station 1
-  if (step == 19 && (positionCurrent - newPosition < 35)) {
-    Wz = -(z - 180) * 1.6;
-    Vx = speed_setpoint;
+  if (step == 19 && (positionCurrent - newPosition < 30)) {
+    Wz = -(z - 179) * 1.6;
+    Vx = 15;
   }
-  if (step == 19 && (positionCurrent - newPosition >= 35)) {
+  if (step == 19 && (positionCurrent - newPosition >= 30)) {
     Vx = 0;
     Vy = 0;
     Wz = 0;
@@ -379,10 +379,23 @@ void Sys_auto() {
     s2 = 0;
     newPosition = positionCurrent;
     time = timeCurrent;
-    step = -1;
+    step = 20;
   }
 
-  if (step >= 0 && step <= 16 && !package) {
+  if (step == 20 && (timeCurrent - time >= restTime)) {
+    if (z <= 25) {
+      Vx = 0;
+      Vy = 0;
+      Wz = 0;
+      newPosition = positionCurrent;
+      time = timeCurrent;
+      step = -1;
+    } else {
+      Wz = -35;
+    }
+  }
+
+  if ((step >= 0 && step <= 16 && !package) || (z > 380)) {
     Vx = 0;
     Vy = 0;
     Wz = 0;
@@ -408,8 +421,8 @@ void Selection_des() {
     // Thời gian đến destination C
     case 3:
       {
-        position_des = 310;
-        position_completion = 310;
+        position_des = 300;
+        position_completion = 300;
         break;
       }
     default:

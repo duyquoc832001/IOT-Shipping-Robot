@@ -9,10 +9,10 @@ MPU6050 mpu6050;
 int stateLED = 0;
 
 // Thiết lập thông số PID
-double kp1 = 10, ki1 = 3, kd1 = 0.01, input1 = 0, output1 = 0, setpoint1 = 0;  // modify kp, ki and kd for optimal performance
-double kp2 = 10, ki2 = 3, kd2 = 0.01, input2 = 0, output2 = 0, setpoint2 = 0;
-double kp3 = 10, ki3 = 3, kd3 = 0.01, input3 = 0, output3 = 0, setpoint3 = 0;
-double kp4 = 10, ki4 = 3, kd4 = 0.01, input4 = 0, output4 = 0, setpoint4 = 0;
+double kp1 = 10, ki1 = 2, kd1 = 0.01, input1 = 0, output1 = 0, setpoint1 = 0;  // modify kp, ki and kd for optimal performance
+double kp2 = 10, ki2 = 2, kd2 = 0.01, input2 = 0, output2 = 0, setpoint2 = 0;
+double kp3 = 10, ki3 = 2, kd3 = 0.01, input3 = 0, output3 = 0, setpoint3 = 0;
+double kp4 = 10, ki4 = 2, kd4 = 0.01, input4 = 0, output4 = 0, setpoint4 = 0;
 float temp1;
 float temp2;
 float temp3;
@@ -66,8 +66,8 @@ float Vx = 0, Vy = 0, Wz = 0.0;
 float lx = 0.10, ly = 0.6, r = 0.3;
 float z;
 
-int speed_setpoint = 25;
-int rotate_setpoint = 30;
+int speed_setpoint = 22;
+int rotate_setpoint = 35;
 long restTime = 1500;
 long position_des = 0;
 long position_completion = 0;
@@ -94,6 +94,19 @@ int s2 = 0;             // biến xác nhận xe đã qua vị trí station 2
 
 // the setup function runs once when you press reset or power the board
 void setup() {
+  // mpu mẫu
+  Serial.begin(115200);
+  Serial.println("\n\nWelcome to the MPU6050 basic example");
+  Serial.println("Driver version " MPU6050_VERSION);
+  Wire.begin();
+
+  Serial.print("MPU6050: sensor is ... ");
+  Serial.println(mpu6050.absent() ? "absent" : "present");
+
+  int error = mpu6050.begin();
+  Serial.print("MPU6050: ");
+  Serial.println(mpu6050.error_str(error));
+  delay(5000);
   // Thiết lập chân đọc xung encoder và ngắt
   pinMode(encoder1PinA, INPUT_PULLUP);
   pinMode(encoder1PinB, INPUT_PULLUP);
@@ -114,7 +127,7 @@ void setup() {
   pinMode(AUTO_MAN, INPUT_PULLUP);
   pinMode(DES_1, INPUT_PULLUP);
   pinMode(DES_2, INPUT_PULLUP);
-  pinMode(OBSTACLE, INPUT_PULLUP);
+  pinMode(OBSTACLE1, INPUT_PULLUP);
 
 
   attachInterrupt(digitalPinToInterrupt(encoder1PinA), encoder1, FALLING);
@@ -154,88 +167,42 @@ void setup() {
 
   pinMode(M4_A, OUTPUT);
   pinMode(M4_B, OUTPUT);
-  //////////////////////////////////////////////////////////////////
-
-  // Setup cảm biến siêu âm
-  // pinMode(CBSA_TRIG, OUTPUT);  //Chân trig xuất tín hiệu
-  // pinMode(CBSA_ECHO, INPUT);   //Chân echo nhận tín hiệu
-  // digitalWrite(CBSA_TRIG, 0);
-  pinMode(CBSA_ECHO, INPUT);  //Chân echo nhận tín hiệu
-
-  ///////////////////////////////////////////////////////////////////
-
-  // mpu mẫu
-  Serial.begin(115200);
-  Serial.println("\n\nWelcome to the MPU6050 basic example");
-  Serial.println("Driver version " MPU6050_VERSION);
-  Wire.begin();
-
-  Serial.print("MPU6050: sensor is ... ");
-  Serial.println(mpu6050.absent() ? "absent" : "present");
-
-  int error = mpu6050.begin();
-  Serial.print("MPU6050: ");
-  Serial.println(mpu6050.error_str(error));
-  delay(5000);
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  MPU6050_t data = mpu6050.get();
   timeCurrent = millis();
   z = mpu6050_yaw();
   // // Wz = -z * 2.0;
   Serial.print("z: ");
   Serial.println(z);
-  
+
   Serial.print("step: ");
   Serial.println(step);
 
   // đọc giá trị của switch
   switch1();
-  // đọc giá trị cảm biến siêu âm
-  // CBSA();
   // Cài đặt thời gian đến các destination
   Selection_des();
 
-  // Chế độ auto xe
+  // Chế độ trên xe
 
-  // if (!obstacle) {
-  //   Sys_man();
-  // } else {
-  //   Vx = 0;
-  //   Vy = 0;
-  //   Wz = 0;
-  // }
   System();
-  // Sys_man();
-  // Sys_auto();
-  // if (auto_man == 0) {
-  //   if (!obstacle) {
-  //     Sys_man();
-  //   } else {
-  //     Vx = 0;
-  //     Vy = 0;
-  //     Wz = 0;
-  //   }
-  // }
 
-  //phương trình động học
+  //phương trình động học  
   base1();
-  // w1 = (1 / r) * (Vx - Vy - (lx + ly) * Wz);
-  // w2 = (1 / r) * (Vx + Vy + (lx + ly) * Wz);
-  // w3 = (1 / r) * (Vx + Vy - (lx + ly) * Wz);
-  // w4 = (1 / r) * (Vx - Vy + (lx + ly) * Wz);
 
   // Chương trình điều khiển motor xe
   PID();
 
   //////////////////////////////////////////////////////
-
-  //mySerial.print("PWM w1: ");
-  //mySerial.println(w1);
-  // Truyền dữ liệu UART
+  // Gửi dữ liệu qua UART
   Send_Data();
+
+  // Dừng xe
+  if(Vx == 0 && Wz == 0) {
+    stop();
+  }
 }
 
 float mpu6050_yaw() {
