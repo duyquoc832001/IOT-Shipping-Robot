@@ -3,7 +3,7 @@
 # Project Title
 
 Vectoring code for a IOT Shipping Robot written for Stm32 Microcontroller.  
-![](Image and Video\ptdh.png)
+![](./Image_and_Video/9e300a29bbd1628f3bc0.jpg)
 
 ## DC Motor Speed Control
 
@@ -12,9 +12,9 @@ Motor speed control using encoders. Encoder are connected to the hardware interr
 ## Vectoring
 
 X and Y vector (or Magnitude, Theta) are transformed to the three motor RPMs.
-![](Image and Video\hetoado.png)
-![](Image and Video\ptdh.png)
-![](Image and Video\noisuybanh.png)
+![](./Image_and_Video/hetoado.png)
+![](./Image_and_Video/ptdh.png)
+![](./Image_and_Video/noisuybanh.png)
 
 ## High Level Control
 
